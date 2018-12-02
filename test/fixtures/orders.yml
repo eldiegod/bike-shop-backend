@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# one:
+#   bikes: MyString
+#   customer: MyString
+#   total: MyString
+
+# two:
+#   bikes: MyString
+#   customer: MyString
+#   total: MyString
