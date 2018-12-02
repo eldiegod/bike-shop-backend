@@ -1,18 +1,12 @@
 class Resolvers::CreateOrder < GraphQL::Function
-  # arguments passed as "args"
-  argument :customer_id, !types.Int
-  # argument :customer_id, !types.Int
+  argument :customer_email, !types.String
   argument :bike_ids, !types[!types.Int]
-  # return type from the mutation
+
   type Types::OrderType
 
-  # the mutation method
-  # _obj - is parent object, which in this case is nil
-  # args - are the arguments passed
-  # _ctx - is the GraphQL context
   def call(_obj, args, _ctx)
     order = Order.create!(
-      customer_id: args[:customer_id],
+      customer_id: Customer.find_by(email: args[:customer_email]).id,
       total: 0
     ) 
     # add each bike to the order
@@ -24,6 +18,7 @@ class Resolvers::CreateOrder < GraphQL::Function
       # sum each ordered bike price to the orders total
       order.total += Bike.find_by(id: bike_id).price
     end
+    # save the modified order
     order.save()
 
     return order
