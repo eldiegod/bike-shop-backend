@@ -6,4 +6,6 @@ Types::CustomerType = GraphQL::ObjectType.define do
   field :id, !types.ID
   field :name, !types.String
   field :email, !types.String
+  # field :orders, -> { Types::OrderType }, property: :orders
+
 end
