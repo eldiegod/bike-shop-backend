@@ -1,3 +1,3 @@
 class Customizable < ApplicationRecord
-  has_many :customizable_options
+  has_and_belongs_to_many :bikes
 end
