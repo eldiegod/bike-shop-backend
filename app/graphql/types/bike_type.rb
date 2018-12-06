@@ -4,4 +4,6 @@ Types::BikeType = GraphQL::ObjectType.define do
   field :id, !types.ID
   field :name, !types.String
   field :price, !types.Float
+  field :customizables, -> { !types[Types::CustomizableType] }
+
 end
