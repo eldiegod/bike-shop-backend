@@ -6,6 +6,7 @@ Types::OrderType = GraphQL::ObjectType.define do
   field :id, !types.ID
 
   field :total, !types.Float
-  field :orderedBy, -> { Types::CustomerType }, property: :customer
-  field :bikesSold, -> { !types[Types::BikeType] }, property: :bikes
+  field :customer, -> { Types::CustomerType }, property: :customer
+  # field :bikes_sold, -> { !types[Types::BikeType] }, property: :bikes
+  field :bike_orders, -> { !types[Types::BikeOrderType] }, property: :bike_orders
 end
