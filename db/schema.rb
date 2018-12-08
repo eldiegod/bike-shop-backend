@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 2018_12_06_140452) do
 
   create_table "customizables", force: :cascade do |t|
     t.string "name"
+    t.boolean "hasColors", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

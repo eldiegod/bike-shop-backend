@@ -8,5 +8,5 @@ Types::OrderType = GraphQL::ObjectType.define do
   field :total, !types.Float
   field :customer, -> { Types::CustomerType }, property: :customer
   # field :bikes_sold, -> { !types[Types::BikeType] }, property: :bikes
-  field :bike_orders, -> { !types[Types::BikeOrderType] }, property: :bike_orders
+  field :bikeOrders, -> { !types[Types::BikeOrderType] }, property: :bike_orders
 end
