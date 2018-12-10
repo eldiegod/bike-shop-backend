@@ -22,7 +22,7 @@ wheel_size = Customizable.create(name: 'Wheel Size', hasColors: false)
 wheel_size.customizable_options.create([{name:'15″'}, {name:'17″'}, {name:'19″'}])
 rim_color = Customizable.create(name: 'Rim Color')
 rim_color.customizable_options.create([{name:'red'}, {name:'black'}, {name:'blue'}, {name:'green'}, {name:'yellow'}])
-saddle_color = Customizable.create(name: 'Saddle Color')
+saddle_color = Customizable.create(name: 'Wheels Color')
 saddle_color.customizable_options.create([{name:'black'}, {name:'blue'}, {name:'brown'}])
 
 Bike.all().each do |b| 

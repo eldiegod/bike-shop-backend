@@ -1,11 +1,8 @@
 Types::CustomizableOptionType = GraphQL::ObjectType.define do
-  # this type is named `CustomizableOption`
   name 'CustomizableOption'
 
-  # it has the following fields
   field :id, !types.ID
 
-  # field :name, !types.String
-  field :choice, !types.String, property: :name
-  field :name, !types.String, property: :customizable_name
+  field :choice, !types.String, property: :name, description: "A choice to select from i.e. 'red' or 'black' or 'blue'"
+  field :name, !types.String, property: :customizable_name, description: "Name of the Customizable part the option belongs to i.e 'Saddle'"
 end
