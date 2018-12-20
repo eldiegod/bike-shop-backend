@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_06_140452) do
+ActiveRecord::Schema.define(version: 2018_12_19_164556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,13 @@ ActiveRecord::Schema.define(version: 2018_12_06_140452) do
     t.index ["customizable_id", "bike_id"], name: "index_bikes_customizables_on_customizable_id_and_bike_id"
   end
 
+  create_table "constrains", id: false, force: :cascade do |t|
+    t.integer "customizable_option_id"
+    t.integer "constrain_customizable_option_id"
+    t.index ["constrain_customizable_option_id", "customizable_option_id"], name: "index_constrains_on_constrain_option_id_and_option_id", unique: true
+    t.index ["customizable_option_id", "constrain_customizable_option_id"], name: "index_constrains_on_option_id_and_constrain_option_id", unique: true
+  end
+
   create_table "customers", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -55,6 +62,7 @@ ActiveRecord::Schema.define(version: 2018_12_06_140452) do
   create_table "customizable_options", force: :cascade do |t|
     t.string "name"
     t.bigint "customizable_id"
+    t.float "price", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["customizable_id"], name: "index_customizable_options_on_customizable_id"

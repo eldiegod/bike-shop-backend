@@ -19,12 +19,20 @@ Bike.find_or_create_by(name: 'iBike', price: 2999.99)
 Bike.find_or_create_by(name: 'Best Bike', price: 300)
 # customizables and options
 wheel_size = Customizable.create(name: 'Wheel Size', hasColors: false)
-wheel_size.customizable_options.create([{name:'15″'}, {name:'17″'}, {name:'19″'}])
+wheel_size.customizable_options.create([{name:'15″'}, {name:'17″', price: 15}, {name:'19″', price: 25}])
 rim_color = Customizable.create(name: 'Rim Color')
-rim_color.customizable_options.create([{name:'red'}, {name:'black'}, {name:'blue'}, {name:'green'}, {name:'yellow'}])
+rim_color.customizable_options.create([{name:'red'}, {name:'green'}, {name:'blue'}, {name:'green-light' }, {name:'yellow'}])
+# add some constrains
 saddle_color = Customizable.create(name: 'Wheels Color')
-saddle_color.customizable_options.create([{name:'black'}, {name:'blue'}, {name:'brown'}])
+saddle_color.customizable_options.create([{name:'black'}, {name:'grey'}, {name:'teal'}])
+CustomizableOption.first.not_allowed_combinations =  [
+  CustomizableOption.find_by(name:'grey'), CustomizableOption.find_by(name:'blue'),
+  CustomizableOption.find_by(name:'green'), CustomizableOption.find_by(name:'green-light'),
+  CustomizableOption.find_by(name:'teal'), CustomizableOption.find_by(name:'yellow'),
+]
+CustomizableOption.second.not_allowed_combinations =  [CustomizableOption.find_by(name:'green-light'), CustomizableOption.find_by(name:'yellow'),CustomizableOption.find_by(name:'teal')]
 
+# add all Customizables to all bikes
 Bike.all().each do |b| 
   b.customizables = Customizable.all()
 end
@@ -40,5 +48,5 @@ end
 p "seeded db"
 p "joshs_order has #{joshs_order.total} debt and bought #{joshs_order.bikes.map{ |b| b.name }}"
 p "and every bike he bought had this options #{joshs_order.bike_orders[0].customizable_options.map{ |co| co.customizable.name + ': ' + co.name  }}"
-p "#{wheel_size.name} has #{wheel_size.customizable_options.map{ |o| o.name }} options"
+p "#{wheel_size.name} has #{wheel_size.customizable_options.map{ |o| [o.name, o.price, o.not_allowed_combinations.map{ |not_allowed| not_allowed.name }] }} options"
 p "#{rim_color.name} has #{rim_color.customizable_options.map{ |o| o.name }} options"

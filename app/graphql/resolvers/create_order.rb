@@ -12,7 +12,7 @@ class Resolvers::CreateOrder < GraphQL::Function
 
   def call(_obj, args, _ctx)
     order = Order.create!(
-      customer_id: Customer.find_by(email: args[:customer_email]).id
+      customer_id: Customer.find_or_create_by(email: args[:customer_email]).id
     ) 
     # add each bike to the order
     args[:custom_bikes].each do |custom_bike|
