@@ -11,6 +11,11 @@ Types::QueryType = GraphQL::ObjectType.define do
     resolve -> (obj, args, ctx) { Order.all }
   end
 
+  field :allCustomizables, !types[Types::CustomizableType] do
+    description "Get's all created Customizables"
+    resolve -> (obj, args, ctx) { Customizable.all }
+  end
+
   field :allBikes, !types[Types::BikeType] do
     description "Get's all created bikes"
     resolve -> (obj, args, ctx) { Bike.all }
