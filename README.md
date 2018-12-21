@@ -1,11 +1,8 @@
 First attempt at using ruby, rails and building a backend with graphql.
 
-To set up locally run
-
+To set up locally run:
 `bundle install`
-
 `rake db:reseed` 
-
 `rails server` 
 
 ### Note:
